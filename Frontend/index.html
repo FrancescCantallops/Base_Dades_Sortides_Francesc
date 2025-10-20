@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ca">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Gestió d'Alumnes</title>
+    <style>
+        body { font-family: system-ui, sans-serif; padding: 20px; }
+        button { padding: 8px 14px; font-size: 16px; border-radius: 6px; cursor: pointer; }
+        #result, #insertResult { margin-top: 16px; }
+        table { border-collapse: collapse; width: 100%; max-width: 600px; }
+        th, td { padding: 8px; border: 1px solid #ddd; text-align: left; }
+        th { background: #f3f3f3; }
+        form { margin-top: 20px; }
+        form label { display: block; margin-bottom: 8px; }
+        form input { padding: 6px; font-size: 14px; width: 200px; margin-right: 10px; }
+    </style>
+</head>
+<body>
+<h1>Gestió d'Alumnes</h1>
+
+<!-- Consulta -->
+<h2>Consulta Alumnes</h2>
+<p>Prem el botó per executar la consulta i mostrar els alumnes.</p>
+<button id="btnConsulta">Executar consulta</button>
+<div id="loading" style="display:none; margin-top:10px;">Carregant...</div>
+<div id="result"></div>
+
+<!-- Inserció -->
+<h2>Afegir Alumne</h2>
+<form id="formInsert">
+    <label>
+        Llinatges: <input type="text" name="llinatges" required>
+    </label>
+    <label>
+        Nom: <input type="text" name="nom" required>
+    </label>
+    <button type="submit">Afegir alumne</button>
+</form>
+<div id="insertResult"></div>
+
+<script>
+    // Consulta
+    const btn = document.getElementById('btnConsulta');
+    const resultDiv = document.getElementById('result');
+    const loading = document.getElementById('loading');
+    btn.addEventListener('click', async () => {
+        resultDiv.innerHTML = '';
+        loading.style.display = 'block';
+
+        try {
+            const resp = await fetch('/consulta');
+            console.log("Resposta fetch /consulta:", resp);
+            const json = await resp.json();
+            console.log("JSON rebuts:", json);
+            loading.style.display = 'none';
+
+            if (!resp.ok || !json.success) {
+                resultDiv.innerHTML = `<p style="color:red;">Error: ${json.error || resp.statusText}</p>`;
+                return;
+            }
+
+            const rows = json.data;
+            if (!rows || rows.length === 0) {
+                resultDiv.innerHTML = "<p>No s'han trobats registres.</p>";
+                return;
+            }
+
+            let html = '<table><thead><tr><th>Llinatges</th><th>Nom</th></tr></thead><tbody>';
+            for (const r of rows) {
+                html += `<tr><td>${escapeHtml(r.Llinatges)}</td><td>${escapeHtml(r.Nom)}</td></tr>`;
+            }
+            html += '</tbody></table>';
+            resultDiv.innerHTML = html;
+        } catch (err) {
+            loading.style.display = 'none';
+            console.error("Error fetch /consulta:", err);
+            resultDiv.innerHTML = `<p style="color:red;">Error de connexió: ${err.message}</p>`;
+        }
+    });
+
+    // Inserció
+    const formInsert = document.getElementById('formInsert');
+    const insertResult = document.getElementById('insertResult');
+    formInsert.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(formInsert);
+        const data = {
+            llinatges: formData.get('llinatges'),
+            nom: formData.get('nom')
+        };
+
+        insertResult.innerHTML = 'Enviant...';
+        try {
+            const resp = await fetch('/insertar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            console.log("Resposta fetch /insertar:", resp);
+            const json = await resp.json();
+            console.log("JSON rebuts /insertar:", json);
+            if (json.success) {
+                insertResult.innerHTML = `✅ ${json.message} (ID: ${json.insertedId})`;
+                formInsert.reset();
+            } else {
+                insertResult.innerHTML = `❌ Error: ${json.error}`;
+            }
+        } catch (err) {
+            console.error("Error fetch /insertar:", err);
+            insertResult.innerHTML = `❌ Error de connexió: ${err.message}`;
+        }
+    });
+
+    // Funció per escapar HTML
+    function escapeHtml(str) {
+        if (str == null) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+</script>
+</body>
+</html>

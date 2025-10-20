@@ -1,0 +1,19 @@
+INSERT INTO `sortides_francesc`.`Grups` (`Nom`, `Nivell`, `Curs`, `Grup`) VALUES ('1 ESO A', 'ESO', '1', 'A');
+INSERT INTO `sortides_francesc`.`Grups` (`Nom`, `Nivell`, `Curs`, `Grup`) VALUES ('1 ESO B', 'ESO', '1', 'B');
+INSERT INTO `sortides_francesc`.`Grups` (`Nom`, `Nivell`, `Curs`, `Grup`) VALUES ('1 ESO C', 'ESO', '1', 'C');
+INSERT INTO `sortides_francesc`.`Grups` (`Nom`, `Nivell`, `Curs`, `Grup`) VALUES ('2 ESO A', 'ESO', '2', 'A');
+INSERT INTO `sortides_francesc`.`Grups` (`Nom`, `Nivell`, `Curs`, `Grup`) VALUES ('2 ESO B', 'ESO', '2', 'B');
+INSERT INTO `sortides_francesc`.`Grups` (`Nom`, `Nivell`, `Curs`, `Grup`) VALUES ('2 ESO C', 'ESO', '2', 'C');
+INSERT INTO `sortides_francesc`.`Grups` (`Nom`, `Nivell`, `Curs`, `Grup`) VALUES ('3 ESO A', 'ESO', '3', 'A');
+INSERT INTO `sortides_francesc`.`Grups` (`Nom`, `Nivell`, `Curs`, `Grup`) VALUES ('3 ESO B', 'ESO', '3', 'B');
+INSERT INTO `sortides_francesc`.`Grups` (`Nom`, `Nivell`, `Curs`, `Grup`) VALUES ('3 ESO C', 'ESO', '3', 'C');
+INSERT INTO `sortides_francesc`.`Grups` (`Nom`, `Nivell`, `Curs`, `Grup`) VALUES ('4 ESO A', 'ESO', '4', 'A');
+INSERT INTO `sortides_francesc`.`Grups` (`Nom`, `Nivell`, `Curs`, `Grup`) VALUES ('4 ESO B', 'ESO', '4', 'B');
+INSERT INTO `sortides_francesc`.`Grups` (`Nom`, `Nivell`, `Curs`, `Grup`) VALUES ('4 ESO C', 'ESO', '4', 'C');
+INSERT INTO `sortides_francesc`.`Grups` (`Nom`, `Nivell`, `Curs`, `Grup`) VALUES ('1 BAT A', 'BAT', '1', 'A');
+INSERT INTO `sortides_francesc`.`Grups` (`Nom`, `Nivell`, `Curs`, `Grup`) VALUES ('1 BAT B', 'BAT', '1', 'B');
+INSERT INTO `sortides_francesc`.`Grups` (`Nom`, `Nivell`, `Curs`, `Grup`) VALUES ('1 BAT C', 'BAT', '1', 'C');
+INSERT INTO `sortides_francesc`.`Grups` (`Nom`, `Nivell`, `Curs`, `Grup`) VALUES ('2 BAT A', 'BAT', '2', 'A');
+INSERT INTO `sortides_francesc`.`Grups` (`Nom`, `Nivell`, `Curs`, `Grup`) VALUES ('2 BAT B', 'BAT', '2', 'B');
+INSERT INTO `sortides_francesc`.`Grups` (`Nom`, `Nivell`, `Curs`, `Grup`) VALUES ('2 BAT C', 'BAT', '2', 'C');
+
