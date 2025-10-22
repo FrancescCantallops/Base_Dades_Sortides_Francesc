@@ -1,0 +1,49 @@
+body {
+    font-family: system-ui, sans-serif;
+    padding: 20px;
+}
+
+button {
+    padding: 8px 14px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#result,
+#insertResult {
+    margin-top: 16px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 600px;
+}
+
+th,
+td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background: #f3f3f3;
+}
+
+form {
+    margin-top: 20px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+form input {
+    padding: 6px;
+    font-size: 14px;
+    width: 200px;
+    margin-right: 10px;
+}
