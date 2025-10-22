@@ -39,7 +39,7 @@ function consulta() {
 }
 
 // Funció insert
-function insertarAlumne(llinatges, nom) {
+function insertarAlumne(llinatges, nom, DNI) {
     return new Promise((resolve, reject) => {
         const con = mysql.createConnection(dbConfig);
         con.connect(err => {
@@ -47,8 +47,8 @@ function insertarAlumne(llinatges, nom) {
                 console.error("Error connectant a MySQL:", err);
                 return reject(err);
             }
-            const sql = "INSERT INTO Alumnes (Llinatges, Nom) VALUES (?, ?)";
-            con.query(sql, [llinatges, nom], (err, result) => {
+            const sql = "INSERT INTO Persones (Llinatges, Nom, DNI) VALUES (?, ?, ?)";
+            con.query(sql, [llinatges, nom, DNI], (err, result) => {
                 con.end();
                 if (err) {
                     console.error("Error fent INSERT:", err);
