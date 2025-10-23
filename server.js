@@ -17,7 +17,7 @@ const dbConfig = {
 };
 
 // Funció consulta amb logs
-function consulta() {
+function consulta(sql) {
     return new Promise((resolve, reject) => {
         const con = mysql.createConnection(dbConfig);
         con.connect(err => {
@@ -25,7 +25,7 @@ function consulta() {
                 console.error("Error connectant a MySQL:", err);
                 return reject(err);
             }
-            const sql = "SELECT Llinatges, Nom FROM Persones";
+            //const sql = "SELECT Llinatges, Nom FROM Persones";
             con.query(sql, (err, results) => {
                 con.end();
                 if (err) {
@@ -65,16 +65,20 @@ function insertarAlumne(llinatges, nom, DNI) {
 app.use(express.static(path.join(__dirname, '.')));
 
 // Endpoint GET /consulta
-app.get('/consulta', async (req, res) => {
-    console.log("Peticio GET /consulta rebuda");
-    try {
-        const results = await consulta();
-        res.json({ success: true, data: results });
-    } catch (err) {
-        console.error("Error a /consulta:", err);
-        res.status(500).json({ success: false, error: err.message });
-    }
-});
+async function endpointGet(handle, sql) {
+    app.get(handle, async (req, res) => {
+        console.log("Peticio GET "+handle+" rebuda");
+        try {
+            const results = await consulta(sql);
+            res.json({ success: true, data: results });
+        } catch (err) {
+            console.error("Error a "+handle+":", err);
+            res.status(500).json({ success: false, error: err.message });
+        }
+    });
+}
+
+endpointGet('/consulta', "SELECT Llinatges, Nom FROM Persones");
 
 // Endpoint POST /insertar
 app.post('/insertar', async (req, res) => {
