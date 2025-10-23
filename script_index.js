@@ -1,24 +1,21 @@
 // Consulta
-const btn = document.getElementById('btnConsulta');
 const resultDiv = document.getElementById('result');
-const loading = document.getElementById('loading');
-btn.addEventListener('click', async () => {
-    resultDiv.innerHTML = '';
-    loading.style.display = 'block';
+
+async function consultaClient() {
+    resultDiv.innerHTML = 'Carregant...';
 
     try {
         const resp = await fetch('/consulta');
         console.log("Resposta fetch /consulta:", resp);
         const json = await resp.json();
         console.log("JSON rebuts:", json);
-        loading.style.display = 'none';
 
         if (!resp.ok || !json.success) {
             resultDiv.innerHTML = `<p style="color:red;">Error: ${json.error || resp.statusText}</p>`;
             return;
         }
 
-        //Trobar error
+        //Llegir files i trobar error
         const rows = json.data;
         if (!rows || rows.length === 0) {
             resultDiv.innerHTML = "<p>No s'han trobats registres.</p>";
@@ -34,15 +31,15 @@ btn.addEventListener('click', async () => {
         resultDiv.innerHTML = html;
 
     } catch (err) {
-        loading.style.display = 'none';
         console.error("Error fetch /consulta:", err);
         resultDiv.innerHTML = `<p style="color:red;">Error de connexió: ${err.message}</p>`;
     }
-});
+};
 
 // Inserció
 const formInsert = document.getElementById('formInsert');
 const insertResult = document.getElementById('insertResult');
+
 formInsert.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(formInsert);
