@@ -1,12 +1,12 @@
 // Consulta
 const resultDiv = document.getElementById('result');
 
-async function consultaClient() {
+async function consultaClient(handle) {
     resultDiv.innerHTML = 'Carregant...';
 
     try {
-        const resp = await fetch('/consulta');
-        console.log("Resposta fetch /consulta:", resp);
+        const resp = await fetch(handle);
+        console.log("Resposta fetch "+handle+":", resp);
         const json = await resp.json();
         console.log("JSON rebuts:", json);
 
@@ -23,15 +23,20 @@ async function consultaClient() {
         }
 
         //Crear taula html
+        let camps = ["Llinatges", "Nom"];
+        let noms = ["Llinatges", "Nom"];
+        Crear_Taula(camps, noms, rows);
+        /*
         let html = '<table><thead><tr><th>Llinatges</th><th>Nom</th></tr></thead><tbody>';
         for (const r of rows) {
             html += `<tr><td>${escapeHtml(r.Llinatges)}</td><td>${escapeHtml(r.Nom)}</td></tr>`;
         }
         html += '</tbody></table>';
         resultDiv.innerHTML = html;
+        */
 
     } catch (err) {
-        console.error("Error fetch /consulta:", err);
+        console.error("Error fetch "+handle+":", err);
         resultDiv.innerHTML = `<p style="color:red;">Error de connexió: ${err.message}</p>`;
     }
 };
@@ -79,4 +84,22 @@ function escapeHtml(str) {
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
+}
+
+function Crear_Taula (camps, noms, rows){
+    let html = '<table><thead><tr>';
+    for (let i=0; i<noms.length; i++){
+        html += "<th>"+noms[i]+"</th>"
+    }
+    html += '</tr></thead><tbody>';
+
+    for (const r of rows) {
+        html += "<tr>";
+        for (let i=0; i<camps.length; i++){
+            html += "<td>"+escapeHtml(r[camps[i]])+"</td>";
+        }
+        html += "<tr>";
+    }
+    html += '</tbody></table>';
+    resultDiv.innerHTML = html;
 }
