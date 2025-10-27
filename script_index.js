@@ -17,23 +17,20 @@ async function consultaClient(handle) {
 
         //Llegir files i trobar error
         const rows = json.data;
+        console.log("JSON data/rows: ", rows);
+        console.log("Nombre files: ", rows.length);
         if (!rows || rows.length === 0) {
             resultDiv.innerHTML = "<p>No s'han trobats registres.</p>";
             return;
         }
+        console.log("1r Objecte JSON: ", rows[0]);
 
         //Crear taula html
+        
         let camps = ["Llinatges", "Nom"];
         let noms = ["Llinatges", "Nom"];
         Crear_Taula(camps, noms, rows);
-        /*
-        let html = '<table><thead><tr><th>Llinatges</th><th>Nom</th></tr></thead><tbody>';
-        for (const r of rows) {
-            html += `<tr><td>${escapeHtml(r.Llinatges)}</td><td>${escapeHtml(r.Nom)}</td></tr>`;
-        }
-        html += '</tbody></table>';
-        resultDiv.innerHTML = html;
-        */
+
 
     } catch (err) {
         console.error("Error fetch "+handle+":", err);
@@ -103,3 +100,31 @@ function Crear_Taula (camps, noms, rows){
     html += '</tbody></table>';
     resultDiv.innerHTML = html;
 }
+
+async function query_selector(alias) {
+
+}
+
+
+/*
+function nombre_keys (myObj){
+    let nombre_elements = 0;
+    for (const x in myObj) {
+        nombre_elements += 1;
+    }
+    return
+}
+*/
+
+/*
+function autoTaula (rows){
+    const myObj2 = JSON.stringify(rows[0]);
+    const myObj = JSON.parse(myObj2);
+    let camps = [];
+    for (const x in myObj){
+        camps.push[x];
+    }
+    console.log(camps);
+    Crear_Taula (camps, camps, rows);
+}
+*/

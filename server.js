@@ -13,7 +13,7 @@ const dbConfig = {
     host: "alumnat.iesdamiahuguet.net",
     user: "francesc",
     password: "JD123456",
-    database: "alumnes_francesc"
+    database: "sortides_francesc"
 };
 
 // Funció consulta amb logs
@@ -78,7 +78,7 @@ async function endpointGet(handle, sql) {
     });
 }
 
-endpointGet('/consulta', "SELECT Llinatges, Nom FROM Persones");
+endpointGet('/consulta', "SELECT Nom FROM Grups");
 
 // Endpoint POST /insertar
 app.post('/insertar', async (req, res) => {
