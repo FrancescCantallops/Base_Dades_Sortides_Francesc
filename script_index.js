@@ -27,8 +27,8 @@ async function consultaClient(handle) {
 
         //Crear taula html
         
-        let camps = ["Llinatges", "Nom"];
-        let noms = ["Llinatges", "Nom"];
+        let camps = ["Nom"];
+        let noms = ["Nom"];
         Crear_Taula(camps, noms, rows);
 
 
