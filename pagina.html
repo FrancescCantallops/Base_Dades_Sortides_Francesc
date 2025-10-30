@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="cat">
+<script src="frontend.js"></script>
 <head>
     <meta charset="UTF-8">
     <title>Consultes SQL</title>
     <link rel="stylesheet" href="estils_principals.css">
 </head>
-<body>
+<body onload="build_page()">
 
     <h1>SORTIDES IES DH</h1>
+    <div id="container"></div>
     <div class="bloc"> 
-        <button class="desplegador"></button> <div class="lloc">Lloc</div>   <div class="data">Data</div> 
-        <hr>
-        <div>Departament</div> <div>Hora sortida - Hora arribada</div>
+        <button class="desplegador" onclick="toggle_deploy(0)"> <img class="img_boto"></button> <div class="lloc">Lloc</div>   <div class="data">Data</div> 
+        <div class="desplegable" id="desplegable_0"> 
+            <hr>
+            <div>Departament</div> <div>Hora sortida - Hora arribada</div>
+            <div> Observacions jashjkdhjksahd </div>
+        </div>${i}
     </div>
     <div class="bloc"> <button class="desplegador"></button> <div class="lloc">Universitat de les Illes Balears</div>   <div class="data">22/08/2025</div> </div>
     <div class="bloc"> <button class="desplegador"></button> <div class="lloc">Palmarena</div>   <div class="data">24/09/2025</div> </div>

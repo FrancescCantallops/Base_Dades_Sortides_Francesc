@@ -1,3 +1,7 @@
+ body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .bloc {
     padding: 20px;
     background-color: wheat;
@@ -17,4 +21,14 @@
 .desplegador {
     height: 22px;
     width: 22px;
+    padding: 0px;
+}
+
+.desplegable {
+    max-width: fit-content/2;
+}
+
+.img_boto {
+    width: 100%;
+    src: "down_arrow_simple_1.png";
 }
