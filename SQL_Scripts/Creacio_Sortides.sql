@@ -22,7 +22,7 @@ USE `sortides_francesc` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sortides_francesc`.`Departaments` (
   `idDepartaments` INT NOT NULL AUTO_INCREMENT,
-  `Nom` VARCHAR(45) NOT NULL,
+  `Nom` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`idDepartaments`))
 ENGINE = InnoDB;
 
@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS `sortides_francesc`.`Sortides` (
   `Data` DATE NOT NULL,
   `Hora_sortida` TIME NOT NULL,
   `Hora_arribada` TIME NOT NULL,
-  `Lloc` VARCHAR(45) NOT NULL,
-  `Observacions` VARCHAR(45) NULL,
+  `Lloc` VARCHAR(100) NOT NULL,
+  `Observacions` VARCHAR(100) NULL,
   `Foto` BLOB NULL,
   `Departaments_idDepartaments` INT NULL,
   PRIMARY KEY (`idSortides`),
@@ -54,10 +54,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sortides_francesc`.`Grups` (
   `idGrups` INT NOT NULL AUTO_INCREMENT,
-  `Nom` VARCHAR(45) NOT NULL,
-  `Nivell` VARCHAR(45) NULL,
+  `Nom` VARCHAR(100) NOT NULL,
+  `Nivell` VARCHAR(100) NULL,
   `Curs` INT NULL,
-  `Grup` VARCHAR(45) NULL,
+  `Grup` VARCHAR(100) NULL,
   PRIMARY KEY (`idGrups`))
 ENGINE = InnoDB;
 
@@ -67,8 +67,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sortides_francesc`.`Professors` (
   `DNI` INT NOT NULL,
-  `Nom` VARCHAR(45) NULL,
-  `Llinatges` VARCHAR(45) NULL,
+  `Nom` VARCHAR(100) NULL,
+  `Llinatges` VARCHAR(100) NULL,
   PRIMARY KEY (`DNI`))
 ENGINE = InnoDB;
 
