@@ -9,12 +9,12 @@
     margin: 10px;
 }
 
-.lloc {
+.tag_left {
     display: inline-block;
     margin-left: 20px;
 }
 
-.data {
+.tag_right {
     float: right;
 }
 
