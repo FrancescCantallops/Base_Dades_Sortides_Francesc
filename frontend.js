@@ -5,12 +5,9 @@ let llocs = ["Serra de Tramuntana", "Fundació Miró", "Aqualand", "Aficine Palm
 let dates = ["12/10/2025", "15/10/2025", "3/11/2025", "5/3/2026", "6/5/2026"];
 
 function build_sortides(){
-    console.log("Carregat build_sortides");
     let nombre_sortides = 5;
-    document.getElementById("container").innerHTML = "";
-    isDeployed = [];
+    build_blocs(nombre_sortides);
     for (let i=0; i<nombre_sortides; i++){
-        build_bloc(i);
         document.getElementById("tagLeft"+i).innerHTML = llocs[i];
         document.getElementById("tagRight"+i).innerHTML = dates[i];
 
@@ -18,21 +15,46 @@ function build_sortides(){
         <div> Departament </div>
         <div> Hora sortida - Hora arribada </div>
         <div> Observacions </div>
+        <div> Grups </div>
+        <div> Professors </div>
         `;
-    } 
+    }
+    document.getElementById("titol").innerHTML = "Sortides";
 }
 
 function build_professors() {
     let nombre_professors = 7;
-    document.getElementById("container").innerHTML = "";
-    isDeployed = [];
+    build_blocs(nombre_professors);
     for (let i=0; i<nombre_professors; i++){
-        build_bloc(i);
         document.getElementById("tagLeft"+i).innerHTML = "Llinatges, Nom";
         document.getElementById("tagRight"+i).innerHTML = "DNI:";
 
         document.getElementById("desplegable"+i).innerHTML += "<div> sortides </div>";
-    } 
+    }
+    document.getElementById("titol").innerHTML = "Professors";
+}
+
+function build_grups() {
+    let nombre_grups = 10;
+    build_blocs(nombre_grups);
+    for (let i=0; i<nombre_grups; i++){
+        document.getElementById("tagLeft"+i).innerHTML = "Nom";
+        document.getElementById("tagRight"+i).innerHTML = "Nombre sortides";
+
+        document.getElementById("desplegable"+i).innerHTML += "<div> sortides </div>";
+    }
+    document.getElementById("titol").innerHTML = "Grups";
+}
+
+function build_departaments() {
+    let nombre_departaments = 3;
+    build_blocs(nombre_departaments);
+    for (let i=0; i<nombre_departaments; i++){
+        document.getElementById("tagLeft"+i).innerHTML = "Nom";
+
+        document.getElementById("desplegable"+i).innerHTML += "<div> sortides </div>";
+    }
+    document.getElementById("titol").innerHTML = "Departaments";
 }
 
 
