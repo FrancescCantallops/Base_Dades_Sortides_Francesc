@@ -89,3 +89,10 @@ function build_blocs(n){
         build_bloc(i);
     }
 }
+
+function showAll(value){
+    for(let i=0; i<isDeployed.length; i++){
+        document.getElementById("desplegable"+i).hidden = !value;
+        isDeployed[i] = value;
+    }
+}
