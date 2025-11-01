@@ -5,6 +5,7 @@ let llocs = ["Serra de Tramuntana", "Fundació Miró", "Aqualand", "Aficine Palm
 let dates = ["12/10/2025", "15/10/2025", "3/11/2025", "5/3/2026", "6/5/2026"];
 
 function build_sortides(){
+    console.log("Carregat build_sortides");
     let nombre_sortides = 5;
     document.getElementById("container").innerHTML = "";
     isDeployed = [];
@@ -13,7 +14,7 @@ function build_sortides(){
         document.getElementById("tagLeft"+i).innerHTML = llocs[i];
         document.getElementById("tagRight"+i).innerHTML = dates[i];
 
-        document.getElementById("desplegable"+i) += `
+        document.getElementById("desplegable"+i).innerHTML += `
         <div> Departament </div>
         <div> Hora sortida - Hora arribada </div>
         <div> Observacions </div>
