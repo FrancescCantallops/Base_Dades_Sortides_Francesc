@@ -1,3 +1,5 @@
+import {consultaClient} from backend_client.js;
+
 let isDeployed = [];
 console.log("Carregat array isDeployed");
 
@@ -35,7 +37,9 @@ function build_professors() {
 }
 
 function build_grups() {
-    let nombre_grups = 10;
+    rows = consultaClient("\grups");
+    let nombre_grups = rows.length;
+    console.log(rows);
     build_blocs(nombre_grups);
     for (let i=0; i<nombre_grups; i++){
         document.getElementById("tagLeft"+i).innerHTML = "Nom";

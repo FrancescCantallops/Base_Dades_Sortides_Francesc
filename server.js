@@ -62,7 +62,9 @@ function insertarAlumne(llinatges, nom, DNI) {
 }
 
 // Serveix l'HTML
+//app.use(express.static(path.join(__dirname, '.')));
 app.use(express.static(path.join(__dirname, '.')));
+
 
 // Endpoint GET /consulta
 async function endpointGet(handle, sql) {
@@ -78,7 +80,7 @@ async function endpointGet(handle, sql) {
     });
 }
 
-endpointGet('/consulta', "SELECT Nom FROM Grups");
+endpointGet('/grups', "SELECT * FROM Grups");
 
 // Endpoint POST /insertar
 app.post('/insertar', async (req, res) => {
