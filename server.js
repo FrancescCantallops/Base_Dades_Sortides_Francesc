@@ -16,6 +16,8 @@ const dbConfig = {
     database: "sortides_francesc"
 };
 
+
+
 // Funció consulta amb logs
 function consulta(sql) {
     return new Promise((resolve, reject) => {

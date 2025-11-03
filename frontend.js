@@ -1,4 +1,4 @@
-import {consultaClient} from backend_client.js;
+//import {consultaClient} from "./backend_client.js";
 
 let isDeployed = [];
 console.log("Carregat array isDeployed");
@@ -36,13 +36,15 @@ function build_professors() {
     document.getElementById("titol").innerHTML = "Professors";
 }
 
-function build_grups() {
-    rows = consultaClient("\grups");
+async function build_grups() {
+    document.getElementById("container").innerHTML = "Carregant...";
+    const rows = await consultaClient('/grups');
     let nombre_grups = rows.length;
     console.log(rows);
+
     build_blocs(nombre_grups);
     for (let i=0; i<nombre_grups; i++){
-        document.getElementById("tagLeft"+i).innerHTML = "Nom";
+        document.getElementById("tagLeft"+i).innerHTML = rows[i].Nom;
         document.getElementById("tagRight"+i).innerHTML = "Nombre sortides";
 
         document.getElementById("desplegable"+i).innerHTML += "<div> sortides </div>";
@@ -99,4 +101,46 @@ function showAll(value){
         document.getElementById("desplegable"+i).hidden = !value;
         isDeployed[i] = value;
     }
+}
+
+async function consultaClient(handle) {
+    //resultDiv.innerHTML = 'Carregant...';
+
+    try {
+        const resp = await fetch(handle);
+        //console.log("Resposta fetch "+handle+":", resp);
+        const json = await resp.json();
+        //console.log("JSON rebuts:", json);
+
+        if (!resp.ok || !json.success) {
+            //resultDiv.innerHTML = `<p style="color:red;">Error: ${json.error || resp.statusText}</p>`;
+            return;
+        }
+
+        //Llegir files i trobar error
+        const rows = json.data;
+        //console.log("JSON data/rows: ", rows);
+        //console.log("Nombre files: ", rows.length);
+        if (!rows || rows.length === 0) {
+            //resultDiv.innerHTML = "<p>No s'han trobats registres.</p>";
+            return;
+        }
+        //console.log("1r Objecte JSON: ", rows[0]);
+        return rows;
+        
+        
+    } catch (err) {
+        //console.error("Error fetch "+handle+":", err);
+        //resultDiv.innerHTML = `<p style="color:red;">Error de connexió: ${err.message}</p>`;
+    }
+};
+
+function escapeHtml(str) {
+    if (str == null) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
 }
