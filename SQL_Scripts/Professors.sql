@@ -1,0 +1,12 @@
+INSERT INTO `sortides_francesc`.`Professors` (`DNI`, `Nom`, `Llinatges`) VALUES ('53654766', 'Llucia', 'Coll Font');
+INSERT INTO `sortides_francesc`.`Professors` (`DNI`, `Nom`, `Llinatges`) VALUES ('89459545', 'Pepe', 'Sastre Sastre');
+INSERT INTO `sortides_francesc`.`Professors` (`DNI`, `Nom`, `Llinatges`) VALUES ('97229271', 'Jaume', 'Bosh Sastre');
+INSERT INTO `sortides_francesc`.`Professors` (`DNI`, `Nom`, `Llinatges`) VALUES ('64370806', 'Jaume', 'Adrover Gener');
+INSERT INTO `sortides_francesc`.`Professors` (`DNI`, `Nom`, `Llinatges`) VALUES ('76413264', 'Aina', 'Sastre Barcelo');
+INSERT INTO `sortides_francesc`.`Professors` (`DNI`, `Nom`, `Llinatges`) VALUES ('35086458', 'Jaume', 'Gener Torrent');
+INSERT INTO `sortides_francesc`.`Professors` (`DNI`, `Nom`, `Llinatges`) VALUES ('22034308', 'Bernat', 'Gener Bosh');
+INSERT INTO `sortides_francesc`.`Professors` (`DNI`, `Nom`, `Llinatges`) VALUES ('38654695', 'Aina', 'Font Font');
+INSERT INTO `sortides_francesc`.`Professors` (`DNI`, `Nom`, `Llinatges`) VALUES ('27316773', 'Toni', 'Barcelo Campins');
+INSERT INTO `sortides_francesc`.`Professors` (`DNI`, `Nom`, `Llinatges`) VALUES ('76220423', 'Joan', 'Coll Torrent');
+INSERT INTO `sortides_francesc`.`Professors` (`DNI`, `Nom`, `Llinatges`) VALUES ('91617103', 'Adria', 'Coll Sans');
+INSERT INTO `sortides_francesc`.`Professors` (`DNI`, `Nom`, `Llinatges`) VALUES ('43890002', 'Jaume', 'Sans Campins');

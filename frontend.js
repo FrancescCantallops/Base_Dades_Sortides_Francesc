@@ -24,12 +24,16 @@ function build_sortides(){
     document.getElementById("titol").innerHTML = "Sortides";
 }
 
-function build_professors() {
-    let nombre_professors = 7;
+async function build_professors() {
+    document.getElementById("container").innerHTML = "Carregant...";
+    const rows = await consultaClient('/professors');
+    let nombre_professors = rows.length;
+    console.log(rows);
+
     build_blocs(nombre_professors);
     for (let i=0; i<nombre_professors; i++){
-        document.getElementById("tagLeft"+i).innerHTML = "Llinatges, Nom";
-        document.getElementById("tagRight"+i).innerHTML = "DNI:";
+        document.getElementById("tagLeft"+i).innerHTML = rows[i].Llinatges + ", " + rows[i].Nom;
+        document.getElementById("tagRight"+i).innerHTML = "DNI: " + rows[i].DNI;
 
         document.getElementById("desplegable"+i).innerHTML += "<div> sortides </div>";
     }
@@ -52,11 +56,15 @@ async function build_grups() {
     document.getElementById("titol").innerHTML = "Grups";
 }
 
-function build_departaments() {
-    let nombre_departaments = 3;
+async function build_departaments() {
+    document.getElementById("container").innerHTML = "Carregant...";
+    const rows = await consultaClient('/departaments');
+    let nombre_departaments = rows.length;
+    console.log(rows);
+
     build_blocs(nombre_departaments);
     for (let i=0; i<nombre_departaments; i++){
-        document.getElementById("tagLeft"+i).innerHTML = "Nom";
+        document.getElementById("tagLeft"+i).innerHTML = rows[i].Nom;
 
         document.getElementById("desplegable"+i).innerHTML += "<div> sortides </div>";
     }

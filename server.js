@@ -83,6 +83,8 @@ async function endpointGet(handle, sql) {
 }
 
 endpointGet('/grups', "SELECT * FROM Grups");
+endpointGet('/departaments', "SELECT * FROM Departaments");
+endpointGet('/professors', 'SELECT * FROM Professors');
 
 // Endpoint POST /insertar
 app.post('/insertar', async (req, res) => {
