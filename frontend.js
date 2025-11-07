@@ -72,7 +72,7 @@ async function build_departaments() {
 
         document.getElementById("desplegable"+i).innerHTML += "<div> sortides </div>";
     }
-    document.getElementById("titol").innerHTML += " ("+nombre_departaments+")";
+    document.getElementById("titol").innerHTML += "("+nombre_departaments+") ";
 }
 
 
