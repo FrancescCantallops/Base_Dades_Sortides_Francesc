@@ -7,6 +7,7 @@ let llocs = ["Serra de Tramuntana", "Fundació Miró", "Aqualand", "Aficine Palm
 let dates = ["12/10/2025", "15/10/2025", "3/11/2025", "5/3/2026", "6/5/2026"];
 
 function build_sortides(){
+    document.getElementById("titol").innerHTML = "Sortides"
     let nombre_sortides = 5;
     build_blocs(nombre_sortides);
     for (let i=0; i<nombre_sortides; i++){
@@ -21,10 +22,11 @@ function build_sortides(){
         <div> Professors </div>
         `;
     }
-    document.getElementById("titol").innerHTML = "Sortides";
+    document.getElementById("titol").innerHTML += " ("+nombre_sortides+")";
 }
 
 async function build_professors() {
+    document.getElementById("titol").innerHTML = "Professors";
     document.getElementById("container").innerHTML = "Carregant...";
     const rows = await consultaClient('/professors');
     let nombre_professors = rows.length;
@@ -37,10 +39,11 @@ async function build_professors() {
 
         document.getElementById("desplegable"+i).innerHTML += "<div> sortides </div>";
     }
-    document.getElementById("titol").innerHTML = "Professors";
+    document.getElementById("titol").innerHTML += " ("+nombre_professors+")";
 }
 
 async function build_grups() {
+    document.getElementById("titol").innerHTML = "Grups";
     document.getElementById("container").innerHTML = "Carregant...";
     const rows = await consultaClient('/grups');
     let nombre_grups = rows.length;
@@ -53,10 +56,11 @@ async function build_grups() {
 
         document.getElementById("desplegable"+i).innerHTML += "<div> sortides </div>";
     }
-    document.getElementById("titol").innerHTML = "Grups";
+    document.getElementById("titol").innerHTML += " ("+nombre_grups+")";
 }
 
 async function build_departaments() {
+    document.getElementById("titol").innerHTML = "Departaments";
     document.getElementById("container").innerHTML = "Carregant...";
     const rows = await consultaClient('/departaments');
     let nombre_departaments = rows.length;
@@ -68,7 +72,7 @@ async function build_departaments() {
 
         document.getElementById("desplegable"+i).innerHTML += "<div> sortides </div>";
     }
-    document.getElementById("titol").innerHTML = "Departaments";
+    document.getElementById("titol").innerHTML += " ("+nombre_departaments+")";
 }
 
 
