@@ -1,5 +1,6 @@
  body {
   font-family: Arial, Helvetica, sans-serif;
+  
 }
 
 h1 {
@@ -14,6 +15,33 @@ h1 {
     border-color: black;
     border-width: 1px;
     border-style: solid;
+}
+
+#afegir_element {
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
+    margin: 10px;
+    border-color: blue;
+    border-width: 3px;
+    border-style: solid;
+    color: blue;
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    width: 50%;
+
+
+    
+    transition: color 200ms;
+    transition: border-color 200ms;
+    transition: background-color 200ms;
+}
+
+#afegir_element:hover {
+    background-color: blue;
+    border-color: white;
+    color: white;
 }
 
 .tag_left {
@@ -39,3 +67,4 @@ h1 {
     width: 100%;
     src: "down_arrow_simple_1.png";
 }
+

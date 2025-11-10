@@ -101,9 +101,9 @@ function build_bloc(i) {
 }
 
 function build_blocs(n){
-    document.getElementById("container").innerHTML = "";
+    document.getElementById("container").innerHTML = "<button id='afegir_element' onclick='carregar_formulari()'> + </button>";
     isDeployed = [];
-    for (let i=0; i<n; i++){
+    for (let i=0; i<n; i++){    
         build_bloc(i);
     }
 }
@@ -113,6 +113,10 @@ function showAll(value){
         document.getElementById("desplegable"+i).hidden = !value;
         isDeployed[i] = value;
     }
+}
+
+function carregar_formulari(){
+    window.location.href = 'http://localhost:3000/formulari.html';
 }
 
 async function consultaClient(handle) {
