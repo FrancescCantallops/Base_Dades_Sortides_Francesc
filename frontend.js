@@ -9,7 +9,7 @@ let dates = ["12/10/2025", "15/10/2025", "3/11/2025", "5/3/2026", "6/5/2026"];
 function build_sortides(){
     document.getElementById("titol").innerHTML = "Sortides"
     let nombre_sortides = 5;
-    build_blocs(nombre_sortides);
+    build_blocs(nombre_sortides, "sortides");
     for (let i=0; i<nombre_sortides; i++){
         document.getElementById("tagLeft"+i).innerHTML = llocs[i];
         document.getElementById("tagRight"+i).innerHTML = dates[i];
@@ -32,7 +32,7 @@ async function build_professors() {
     let nombre_professors = rows.length;
     console.log(rows);
 
-    build_blocs(nombre_professors);
+    build_blocs(nombre_professors, "professors");
     for (let i=0; i<nombre_professors; i++){
         document.getElementById("tagLeft"+i).innerHTML = rows[i].Llinatges + ", " + rows[i].Nom;
         document.getElementById("tagRight"+i).innerHTML = "DNI: " + rows[i].DNI;
@@ -49,7 +49,7 @@ async function build_grups() {
     let nombre_grups = rows.length;
     console.log(rows);
 
-    build_blocs(nombre_grups);
+    build_blocs(nombre_grups, "grups");
     for (let i=0; i<nombre_grups; i++){
         document.getElementById("tagLeft"+i).innerHTML = rows[i].Nom;
         document.getElementById("tagRight"+i).innerHTML = "Nombre sortides";
@@ -66,7 +66,7 @@ async function build_departaments() {
     let nombre_departaments = rows.length;
     console.log(rows);
 
-    build_blocs(nombre_departaments);
+    build_blocs(nombre_departaments, "departaments");
     for (let i=0; i<nombre_departaments; i++){
         document.getElementById("tagLeft"+i).innerHTML = rows[i].Nom;
 
@@ -100,8 +100,9 @@ function build_bloc(i) {
         isDeployed.push(false);
 }
 
-function build_blocs(n){
-    document.getElementById("container").innerHTML = "<button id='afegir_element' onclick='carregar_formulari()'> + </button>";
+function build_blocs(n, formulari){
+    let nom_formulari = '"'+formulari+'"';
+    document.getElementById("container").innerHTML = "<button id='afegir_element' onclick='carregar_formulari("+nom_formulari+")'> + </button>";
     isDeployed = [];
     for (let i=0; i<n; i++){    
         build_bloc(i);
@@ -115,8 +116,8 @@ function showAll(value){
     }
 }
 
-function carregar_formulari(){
-    window.location.href = 'http://localhost:3000/formulari.html';
+function carregar_formulari(nom){
+    window.location.href = 'http://localhost:3000/Formularis/formulari_'+nom+'.html';
 }
 
 async function consultaClient(handle) {
