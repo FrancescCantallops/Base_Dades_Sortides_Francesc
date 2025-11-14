@@ -28,32 +28,10 @@ function consulta(sql) {
                 return reject(err);
             }
             //const sql = "SELECT Llinatges, Nom FROM Persones";
-            con.query(sql, (err, results) => {
+            con.query(sql, (err, result) => {
                 con.end();
                 if (err) {
                     console.error("Error fent consulta:", err);
-                    return reject(err);
-                }
-                resolve(results);
-            });
-        });
-    });
-}
-
-// Funció insert
-function insertarAlumne(llinatges, nom, DNI) {
-    return new Promise((resolve, reject) => {
-        const con = mysql.createConnection(dbConfig);
-        con.connect(err => {
-            if (err) {
-                console.error("Error connectant a MySQL:", err);
-                return reject(err);
-            }
-            const sql = "INSERT INTO Persones (Llinatges, Nom, DNI) VALUES (?, ?, ?)";
-            con.query(sql, [llinatges, nom, DNI], (err, result) => {
-                con.end();
-                if (err) {
-                    console.error("Error fent INSERT:", err);
                     return reject(err);
                 }
                 console.log(result);
@@ -94,7 +72,7 @@ app.post('/insertar', async (req, res) => {
         return res.status(400).json({ success: false, error: 'Falten dades' });
     }
     try {
-        const result = await insertarAlumne(llinatges, nom);
+        const result = await insertar(sql);
         res.json({ success: true, message: 'Alumne afegit', insertedId: result.insertId });
     } catch (err) {
         console.error("Error a /insertar:", err);
