@@ -3,14 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Consultes SQL</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">   
     <link rel="stylesheet" href="estils_principals.css">
     <script language="JavaScript" type="text/javascript" src="formularis.js"></script>    
 </head>
 <body id="cos">
     <h1>Professors</h1>
-<form>
-
+<form id="formulari_professors">
+    <div class="mb-3">
+        <label for="Nom" class="form-label">Nom: </label>   
+        <input type="text" id="Nom" name="Nom" clas="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="Llinatges" class="form-label">Llinatges: </label>   
+        <input type="text" id="Llinatges" name="Llinatges" clas="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="DNI" class="form-label">DNI: </label>   
+        <input type="text" id="DNI" name="DNI" clas="form-control" required>
+        <div class="form-text">Han de ser 8 digits numerics sense la lletra final</div>
+    </div>
 </form>
+<button type="submit" onclick="enviar_professor('formulari_professors')" class="btn btn-primary">Crear professor</button>
+<div id="insertResult"></div>
 </body>
 
 

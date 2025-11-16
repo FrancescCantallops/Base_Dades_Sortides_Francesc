@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Consultes SQL</title>
-    <link rel="stylesheet" href="estils_principals.css">
-    <script language="JavaScript" type="text/javascript" src="formularis.js"></script>    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script language="JavaScript" type="text/javascript" src="formularis.js"></script> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">   
 </head>
 <body id="cos">
     <h1>Departaments</h1>
-<form>
-    <div>
-        <label>
-            Nom departament:
-            <input type="text" id="nom_departament">
-        </label>
+<form id="formulari_departaments">
+    <div class="mb-3">
+        <label for="Nom" class="form-label">Nom departament: </label>   
+        <input type="text" id="Nom" name="Nom" clas="form-control" required>
     </div>
-    
-    <button type="submit">Crear departament</button>
 </form>
+<button type="submit" onclick="enviar_departament('formulari_departaments')" class="btn btn-primary">Crear departament</button>
+<div id="insertResult"></div>
 </body>
 
 
