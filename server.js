@@ -63,6 +63,7 @@ async function endpointGet(handle, sql) {
 endpointGet('/grups', "SELECT * FROM Grups ORDER BY Nivell DESC, Curs, Grup");
 endpointGet('/departaments', "SELECT * FROM Departaments");
 endpointGet('/professors', 'SELECT * FROM Professors');
+endpointGet('/sortides', 'SELECT * FROM Sortides ORDER BY Data');
 
 // Endpoint POST /insertar
 app.post('/insertar', async (request, res) => {
@@ -87,6 +88,29 @@ app.post('/insertar', async (request, res) => {
         res.json({ success: true, message: 'Afegit element a '+table, insertedId: result.insertId });
     } catch (err) {
         console.error("Error a /insertar:", err);
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
+
+app.post('/find', async (request, res) => {
+    //const { llinatges, nom } = request.body;
+    const data = request.body;
+
+    const table = data.table;
+    const field = data.field;
+    const value = data.value;
+    console.log("Peticio POST /insertar rebuda:", request.body);
+    if (!table || !field || !value) {
+        return res.status(400).json({ success: false, error: 'Falten dades' });
+    }
+
+    let sql = "SELECT * FROM "+table+" WHERE "+field+"='"+value+"'";
+    console.log('SQL:', sql);
+    try {
+        const result = await querry(sql);
+        res.json({ success: true, message: 'Trobat element a '+table, result});
+    } catch (err) {
+        console.error("Error a /find:", err);
         res.status(500).json({ success: false, error: err.message });
     }
 });

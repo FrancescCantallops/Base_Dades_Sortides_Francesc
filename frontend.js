@@ -6,21 +6,27 @@ console.log("Carregat array isDeployed");
 let llocs = ["Serra de Tramuntana", "Fundació Miró", "Aqualand", "Aficine Palma", "Palma Jump"];
 let dates = ["12/10/2025", "15/10/2025", "3/11/2025", "5/3/2026", "6/5/2026"];
 
-function build_sortides(){
-    document.getElementById("titol").innerHTML = "Sortides"
-    let nombre_sortides = 5;
+async function build_sortides(){
+    document.getElementById("titol").innerHTML = "Sortides";
+    document.getElementById("container").innerHTML = "Carregant...";
+    const rows = await consultaClient('/sortides');
+    let nombre_sortides = rows.length;
+    console.log(rows);
     build_blocs(nombre_sortides, "sortides");
     for (let i=0; i<nombre_sortides; i++){
-        document.getElementById("tagLeft"+i).innerHTML = llocs[i];
-        document.getElementById("tagRight"+i).innerHTML = dates[i];
+        row = rows[i];
+        document.getElementById("tagLeft"+i).innerHTML = row.Lloc;
+        document.getElementById("tagRight"+i).innerHTML = row.Data.slice(0, 10);
 
-        document.getElementById("desplegable"+i).innerHTML += `
-        <div> Departament </div>
-        <div> Hora sortida - Hora arribada </div>
-        <div> Observacions </div>
-        <div> Grups </div>
-        <div> Professors </div>
-        `;
+        resposta_departament = await find("Departaments", "idDepartaments", row.Departaments_idDepartaments);
+        departament = resposta_departament[0];
+
+        desplegable = document.getElementById("desplegable"+i);
+        desplegable.innerHTML += "<div>"+departament.Nom+"</div>";
+        desplegable.innerHTML += "<div>"+row.Hora_sortida.slice(0, 5)+" - "+row.Hora_arribada.slice(0, 5)+"</div>";
+        desplegable.innerHTML += "<div> Observacions: "+row.Observacions+"</div>";
+        desplegable.innerHTML += "<div> Grups </div>";
+        desplegable.innerHTML += "<div> Professors </div>";
     }
     document.getElementById("titol").innerHTML += " ("+nombre_sortides+")";
 }
@@ -151,6 +157,33 @@ async function consultaClient(handle) {
         //resultDiv.innerHTML = `<p style="color:red;">Error de connexió: ${err.message}</p>`;
     }
 };
+
+async function find(table, field, value){
+    const data = {
+        table: table,
+        field: field,
+        value: value,
+    }
+    try {
+        const resp = await fetch('/find', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        console.log("Resposta fetch /find:", resp);
+        const json = await resp.json();
+        console.log("JSON rebuts /find:", json);
+        if (json.success) {
+            console.log("Fetch /find ha funcionat");
+            return json.result;
+        } else {
+            insertResult.innerHTML = `❌ Error: ${json.error}`;
+        }
+    } catch (err) {
+        console.error("Error fetch /find:", err);
+        insertResult.innerHTML = `❌ Error de connexió: ${err.message}`;
+    }
+}
 
 function escapeHtml(str) {
     if (str == null) return '';
