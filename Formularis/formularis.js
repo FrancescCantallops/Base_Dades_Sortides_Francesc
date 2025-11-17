@@ -124,7 +124,19 @@ async function build_opcions_sortides(){
     document.getElementById("Departament").innerHTML += html;
 }
 
+async function build_opcions_sortides_professors(){
+    const rows_sortides = await consultaClient('/sortides');
+    const rows_professors = await consultaClient('/professors');
 
+    let html = '';
+    for(let i=0; i<rows_sortides.length; i++){
+        html += '<option value="'+rows_sortides[i].idSortides+'">';
+        html += rows_sortides[i].Lloc+" "+rows_sortides[i].Data.slice(0, 10);
+        html += '</option>';
+    }
+    console.log(html);
+    document.getElementById("Sortida").innerHTML += html;
+}
 
 async function enviar_insert(data, formInsert, insertResult){
     insertResult.innerHTML = 'Enviant...';
@@ -153,8 +165,10 @@ async function consultaClient(handle) {
     try {
         const resp = await fetch(handle);
         const json = await resp.json();
+        console.log(json);
 
         if (!resp.ok || !json.success) {
+            console.log("Error", json.error);
             return;
         }
 

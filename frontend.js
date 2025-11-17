@@ -12,7 +12,7 @@ async function build_sortides(){
     const rows = await consultaClient('/sortides');
     let nombre_sortides = rows.length;
     console.log(rows);
-    build_blocs(nombre_sortides, "sortides");
+    build_blocs(nombre_sortides, "formulari_sortides");
     for (let i=0; i<nombre_sortides; i++){
         row = rows[i];
         document.getElementById("tagLeft"+i).innerHTML = row.Lloc;
@@ -38,7 +38,7 @@ async function build_professors() {
     let nombre_professors = rows.length;
     console.log(rows);
 
-    build_blocs(nombre_professors, "professors");
+    build_blocs(nombre_professors, "formulari_professors");
     for (let i=0; i<nombre_professors; i++){
         document.getElementById("tagLeft"+i).innerHTML = rows[i].Llinatges + ", " + rows[i].Nom;
         document.getElementById("tagRight"+i).innerHTML = "DNI: " + rows[i].DNI;
@@ -55,7 +55,7 @@ async function build_grups() {
     let nombre_grups = rows.length;
     console.log(rows);
 
-    build_blocs(nombre_grups, "grups");
+    build_blocs(nombre_grups, "formulari_grups");
     for (let i=0; i<nombre_grups; i++){
         document.getElementById("tagLeft"+i).innerHTML = rows[i].Nom;
         document.getElementById("tagRight"+i).innerHTML = "Nombre sortides";
@@ -72,7 +72,7 @@ async function build_departaments() {
     let nombre_departaments = rows.length;
     console.log(rows);
 
-    build_blocs(nombre_departaments, "departaments");
+    build_blocs(nombre_departaments, "formulari_departaments");
     for (let i=0; i<nombre_departaments; i++){
         document.getElementById("tagLeft"+i).innerHTML = rows[i].Nom;
 
@@ -123,7 +123,7 @@ function showAll(value){
 }
 
 function carregar_formulari(nom){
-    window.location.href = 'http://localhost:3000/Formularis/formulari_'+nom+'.html';
+    window.location.href = 'http://localhost:3000/Formularis/'+nom+'.html';
 }
 
 async function consultaClient(handle) {
