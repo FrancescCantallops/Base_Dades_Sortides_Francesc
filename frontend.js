@@ -79,13 +79,13 @@ async function build_departaments() {
         document.getElementById("tagLeft"+i).innerHTML = rows[i].Nom;
 
         const sortides = await find("Sortides", "Departaments_idDepartaments", rows[i].idDepartaments)
-        if(sortides.length == 0){
-            document.getElementById("desplegable"+i).innerHTML += "<div> No hi ha cap sortida planificada </div>";
+        if(sortides.length > 0){
+            for (let i = 0; i < sortides.length; i++) {
+                document.getElementById("desplegable" + i).innerHTML += "<div>" + sortides[i].Nom + "</div>";
+            }
         }
         else {
-            for(let i=0; i<sortides.length; i++){
-                document.getElementById("desplegable"+i).innerHTML += "<div>"+sortides[i].Nom+"</div>";
-            }
+            document.getElementById("desplegable"+i).innerHTML += "<div> No hi ha cap sortida planificada </div>";
         }
         
     }

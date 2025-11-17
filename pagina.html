@@ -8,17 +8,24 @@
     <script language="JavaScript" type="text/javascript" src="frontend.js"></script>
 </head>
 <body onload="build_sortides()">
+<div class="panell">
+<div class="botonera">
     <button onclick="build_sortides()" class="btn btn-primary">Sortides</button>
     <button onclick="build_professors()" class="btn btn-primary">Professors</button>
     <button onclick="build_grups()" class="btn btn-primary">Grups</button>
     <button onclick="build_departaments()" class="btn btn-primary">Departaments</button>
+</div>
 
+<div class="botonera">
     <button onclick="showAll(true)" class="btn btn-secondary">Mostrar tot</button>
     <button onclick="showAll(false)" class="btn btn-secondary">Amagar tot</button>
+</div>
 
+<div class="botonera">
     <button onclick="carregar_formulari('sortides_grups')">Sortides-Grups</button>
     <button onclick="carregar_formulari('sortides_professors')">Sortides-Professors</button>
-    
+</div>
+</div>
     <h1 id="titol">SORTIDES IES DH</h1>
     <div id="container"></div>
     

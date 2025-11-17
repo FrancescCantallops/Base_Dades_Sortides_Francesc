@@ -17,6 +17,11 @@ h1 {
     border-style: solid;
 }
 
+.botonera {
+    display: inline-block;
+    margin:10px;
+}
+
 #afegir_element {
     padding: 20px;
     background-color: dimgray;
