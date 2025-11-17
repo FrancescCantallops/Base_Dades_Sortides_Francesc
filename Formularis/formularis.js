@@ -101,12 +101,36 @@ async function enviar_sortida(id_formulari){
     enviar_insert(data, formInsert, insertResult);
 }
 
+async function enviar_sortida_professor(id_formulari) {
+    const formInsert = document.getElementById(id_formulari);
+    const insertResult = document.getElementById('insertResult');
+    const dadesFormulari = new FormData(formInsert);
+
+    const idSortida = dadesFormulari.get("Sortida");
+    const DNI = dadesFormulari.get("Professor");
+
+    const fields = ["Sortides_idSortides", "Professors_DNI"];
+    const values = [idSortida, DNI];
+    for(let i=0; i<values.length; i++){
+        if(values[i] == ''){
+        insertResult.innerHTML = "Falten camps obligatoris per emplanar";
+        return;
+        }
+    }
+    const data = {
+        table: "Sortides_Professors",
+        fields: fields,
+        values: values,
+    }
+    enviar_insert(data, formInsert, insertResult);
+}
+
 function build_opcions_grups(){
     let opcionsCurs = ["1r d'ESO", "2n d'ESO", "3r d'ESO", "4t d'ESO", "1r de Batxiller", "2n de Batxiller"];
     let html = '';
-    for(let i=0; i<llista.length; i++){
+    for(let i=0; i<opcionsCurs.length; i++){
         html += '<option value="'+i+'">';
-        html += llista[i];
+        html += opcionsCurs[i];
         html += '</option>';
     }
     document.getElementById("cursInivell").innerHTML += html;
@@ -124,18 +148,33 @@ async function build_opcions_sortides(){
     document.getElementById("Departament").innerHTML += html;
 }
 
-async function build_opcions_sortides_professors(){
-    const rows_sortides = await consultaClient('/sortides');
-    const rows_professors = await consultaClient('/professors');
+
+
+async function build_opcions_llista_sortides(){
+    const rows = await consultaClient('/sortides');
 
     let html = '';
-    for(let i=0; i<rows_sortides.length; i++){
-        html += '<option value="'+rows_sortides[i].idSortides+'">';
-        html += rows_sortides[i].Lloc+" "+rows_sortides[i].Data.slice(0, 10);
+    for(let i=0; i<rows.length; i++){
+        html += '<option value="'+rows[i].idSortides+'">';
+        html += rows[i].Lloc+" "+rows[i].Data.slice(0, 10);
         html += '</option>';
     }
     console.log(html);
     document.getElementById("Sortida").innerHTML += html;
+}
+
+async function build_opcions_sortides_professors() {
+    build_opcions_llista_sortides();
+    const rows = await consultaClient('/professors');
+
+    let html = '';
+    for(let i=0; i<rows.length; i++){
+        html += '<option value="'+rows[i].DNI+'">';
+        html += rows[i].Nom+" "+rows[i].Llinatges+" DNI:"+rows[i].DNI;
+        html += '</option>';
+    }
+    console.log(html);
+    document.getElementById("Professor").innerHTML += html;
 }
 
 async function enviar_insert(data, formInsert, insertResult){
@@ -150,7 +189,7 @@ async function enviar_insert(data, formInsert, insertResult){
         const json = await resp.json();
         console.log("JSON rebuts /insertar:", json);
         if (json.success) {
-            insertResult.innerHTML = `✅ ${json.message} (ID: ${json.insertedId})`;
+            insertResult.innerHTML = `✅ ${json.message}`;
             formInsert.reset();
         } else {
             insertResult.innerHTML = `❌ Error: ${json.error}`;

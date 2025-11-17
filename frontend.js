@@ -24,7 +24,9 @@ async function build_sortides(){
         desplegable = document.getElementById("desplegable"+i);
         desplegable.innerHTML += "<div>"+departament.Nom+"</div>";
         desplegable.innerHTML += "<div>"+row.Hora_sortida.slice(0, 5)+" - "+row.Hora_arribada.slice(0, 5)+"</div>";
-        desplegable.innerHTML += "<div> Observacions: "+row.Observacions+"</div>";
+        if(row.Observacions != ''){
+            desplegable.innerHTML += "<div> Observacions: "+row.Observacions+"</div>";
+        }
         desplegable.innerHTML += "<div> Grups </div>";
         desplegable.innerHTML += "<div> Professors </div>";
     }
@@ -76,7 +78,16 @@ async function build_departaments() {
     for (let i=0; i<nombre_departaments; i++){
         document.getElementById("tagLeft"+i).innerHTML = rows[i].Nom;
 
-        document.getElementById("desplegable"+i).innerHTML += "<div> sortides </div>";
+        const sortides = await find("Sortides", "Departaments_idDepartaments", rows[i].idDepartaments)
+        if(sortides.length == 0){
+            document.getElementById("desplegable"+i).innerHTML += "<div> No hi ha cap sortida planificada </div>";
+        }
+        else {
+            for(let i=0; i<sortides.length; i++){
+                document.getElementById("desplegable"+i).innerHTML += "<div>"+sortides[i].Nom+"</div>";
+            }
+        }
+        
     }
     document.getElementById("titol").innerHTML += "("+nombre_departaments+") ";
 }
