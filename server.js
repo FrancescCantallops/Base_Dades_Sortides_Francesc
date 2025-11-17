@@ -60,7 +60,7 @@ async function endpointGet(handle, sql) {
     });
 }
 
-endpointGet('/grups', "SELECT * FROM Grups");
+endpointGet('/grups', "SELECT * FROM Grups ORDER BY Nivell DESC, Curs, Grup");
 endpointGet('/departaments', "SELECT * FROM Departaments");
 endpointGet('/professors', 'SELECT * FROM Professors');
 

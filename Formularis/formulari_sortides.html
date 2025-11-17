@@ -3,25 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Consultes SQL</title>
-    <link rel="stylesheet" href="estils_principals.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">   
     <script language="JavaScript" type="text/javascript" src="formularis.js"></script>    
 </head>
-<body id="cos">
+<body id="cos" class="" onload="build_opcions_sortides()">
     <h1>Sortides</h1>
-<form>
 
-<form>
-    <label>
-        Professors:
-        <select id="cars">
-            <option value=""> Afegir professor </option>
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
+<form id="formulari_sortides">
+    <div class="mb-3">
+        <label for="Lloc" class="form-label">Lloc: </label>   
+        <input type="text" id="Lloc" name="Lloc" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="Data" class="form-label">Data: </label>   
+        <input type="date" id="Data" name="Data" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="Hora_sortida" class="form-label">Hora sortida: </label>   
+        <input type="time" id="Hora_sortida" name="Hora_sortida" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="Hora_arribada" class="form-label">Hora arribada: </label>   
+        <input type="time" id="Hora_arribada" name="Hora_arribada" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="Departament" class="form-label">Departament: </label>
+        <select id="Departament" name="Departament" class="form-select" required>
+            <option value="">Seleccionau el departament</option>
         </select>
-    </label>
+    </div>
+    <div class="mb-3">
+        <label for="Observacions" class="form-label">Observacions: </label>   
+        <input type="text" id="Observacions" name="Observacions" class="form-control" required>
+    </div>
 </form>
+<button type="submit" onclick="enviar_sortida('formulari_sortides')" class="btn btn-primary">Crear sortida</button>
+<div id="insertResult"></div>
 
-
+</body>
 </html>

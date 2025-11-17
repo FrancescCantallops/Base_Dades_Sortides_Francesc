@@ -38,6 +38,94 @@ async function enviar_professor(id_formulari){
     enviar_insert(data, formInsert, insertResult);
 }
 
+async function enviar_grup(id_formulari){
+    const formInsert = document.getElementById(id_formulari);
+    const insertResult = document.getElementById('insertResult');
+    const dadesFormulari = new FormData(formInsert);
+
+    const llistaCursos = ["1", "2", "3", "4", "1", "2"];
+    const llistaNivells = [0, 0, 0, 0, 1, 1];
+    const nivells = ["ESO", "BATX"];
+
+    const opcioCurs = dadesFormulari.get("cursInivell");
+    console.log(opcioCurs);
+    const Curs = llistaCursos[opcioCurs];
+    const Nivell = nivells[llistaNivells[opcioCurs]];
+    const Grup = dadesFormulari.get("Grup");
+    const Nom = Curs+" "+Nivell+" "+Grup;
+
+    const fields = ["Nom", "Curs", "Nivell", "Grup"];
+    const values = [Nom, Curs, Nivell, Grup];
+    for(let i=0; i<values.length; i++){
+        if(values[i] == ''){
+        insertResult.innerHTML = "Ha d'emplanar tots els camps";
+        return;
+        }
+    }
+    const data = {
+        table: "Grups",
+        fields: fields,
+        values: values,
+    }
+    enviar_insert(data, formInsert, insertResult);
+}
+
+async function enviar_sortida(id_formulari){
+    const formInsert = document.getElementById(id_formulari);
+    const insertResult = document.getElementById('insertResult');
+    const dadesFormulari = new FormData(formInsert);
+
+    const Lloc = dadesFormulari.get("Lloc");
+    const Observacions = dadesFormulari.get("Observacions");
+    const Departament = dadesFormulari.get("Departament");
+    const Data = dadesFormulari.get("Data"); 
+    console.log(Data);
+    const Hora_sortida = dadesFormulari.get("Hora_sortida");
+    console.log(Hora_sortida);
+    const Hora_arribada = dadesFormulari.get("Hora_arribada");
+    console.log(Hora_arribada);
+
+    const fields = ["Data", "Hora_sortida", "Hora_arribada", "Lloc", "Observacions", "Departaments_idDepartaments"];
+    const values = [Data, Hora_sortida, Hora_arribada, Lloc, Observacions, Departament];
+    for(let i=0; i<values.length; i++){
+        if(values[i] == '' && i != 4){
+        insertResult.innerHTML = "Falten camps obligatoris per emplanar";
+        return;
+        }
+    }
+    const data = {
+        table: "Sortides",
+        fields: fields,
+        values: values,
+    }
+    enviar_insert(data, formInsert, insertResult);
+}
+
+function build_opcions_grups(){
+    let opcionsCurs = ["1r d'ESO", "2n d'ESO", "3r d'ESO", "4t d'ESO", "1r de Batxiller", "2n de Batxiller"];
+    let html = '';
+    for(let i=0; i<llista.length; i++){
+        html += '<option value="'+i+'">';
+        html += llista[i];
+        html += '</option>';
+    }
+    document.getElementById("cursInivell").innerHTML += html;
+}
+
+async function build_opcions_sortides(){
+    const rows = await consultaClient('/departaments');
+    let html = '';
+    for(let i=0; i<rows.length; i++){
+        html += '<option value="'+rows[i].idDepartaments+'">';
+        html += rows[i].Nom;
+        html += '</option>';
+    }
+    console.log(html);
+    document.getElementById("Departament").innerHTML += html;
+}
+
+
+
 async function enviar_insert(data, formInsert, insertResult){
     insertResult.innerHTML = 'Enviant...';
     try {
@@ -60,3 +148,23 @@ async function enviar_insert(data, formInsert, insertResult){
         insertResult.innerHTML = `❌ Error de connexió: ${err.message}`;
     }
 }
+
+async function consultaClient(handle) {
+    try {
+        const resp = await fetch(handle);
+        const json = await resp.json();
+
+        if (!resp.ok || !json.success) {
+            return;
+        }
+
+        const rows = json.data;
+        if (!rows || rows.length === 0) {
+            return;
+        }
+        console.log(rows);
+        return rows;
+        
+    } catch (err) {
+    }
+};
